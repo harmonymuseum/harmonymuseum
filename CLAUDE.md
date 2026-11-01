@@ -1,9 +1,9 @@
 # harmonymuseum.org — working notes for Claude Code
 
 This is the website of the Harmony Museum (Historic Harmony, Inc., Harmony, PA).
-Plain HTML/CSS/JS, no build step, no framework. **Pushing to `main` deploys the
-preview at bradsbots.github.io/harmonymuseum within about a minute.** There is no
-staging: what you push is what visitors see (once the domain is switched over).
+Plain HTML/CSS/JS, no build step, no framework. **Pushing to `main` deploys
+harmonymuseum.org (GitHub Pages, repo github.com/harmonymuseum/harmonymuseum) within
+about a minute.** There is no staging: what you push is what visitors see.
 
 ## Where things live
 
@@ -14,6 +14,8 @@ staging: what you push is what visitors see (once the domain is switched over).
 | Rental fees, venue capacities, booked dates | `data/site.js` → `venues[]`, `venueHolds[]` | |
 | The Instagram post on the homepage | `data/site.js` → `featured[]` | Paste a new post URL; the embed loads on click. |
 | Membership/donate checkout links (Zeffy) | `data/site.js` → `giving` | Empty = pages say "call or mail a check". |
+| Where the contact/rental forms send | `data/site.js` → `forms` | Form-service URL (Formspree/Web3Forms). Empty = "Send" opens the visitor's email app. |
+| Old WordPress URLs that forward | `_redirects`, then `python3 tools/make_redirect_stubs.py` | Generates the stub folders (`plan-a-visit/` etc.) and the wildcard map in `404.html`. Never edit the stubs. |
 | Walking-tour stop names/descriptions | `data/walking-tour.json`, then regenerate `data/walking-tour.js` (see below) | |
 | A page's words | the `.html` file | Pages are self-contained; shared bits are in `assets/`. |
 | Footer (all pages at once) | `tools/apply_footer.py` → then run it | Never edit the footer in individual pages. |
@@ -85,7 +87,7 @@ git commit -m "What you changed, in one line"
 git push
 ```
 
-That's it — GitHub Pages rebuilds in about a minute. If you break something, `git revert HEAD` and push again.
+That's it — GitHub Pages rebuilds in about a minute. `CNAME` holds the domain; don't delete it. If you break something, `git revert HEAD` and push again.
 
 ## What's still owed by the museum
 

@@ -117,8 +117,8 @@ textarea{min-height:130px;resize:vertical}
     <span><a href="privacy.html">Privacy</a><span class="proto"> · Preview — not the live site</span></span>
   </div>
 </footer>
-<script src="data/site.js?v=10"></script>
-<script src="assets/site.js?v=4"></script>
+<script src="data/site.js?v=11"></script>
+<script src="assets/site.js?v=5"></script>
 <script>
 (function(){
   var c = document.getElementById("confirm");
@@ -126,7 +126,9 @@ textarea{min-height:130px;resize:vertical}
     c.textContent = "Thank you — your message is in the museum's inbox. Someone will reply within 3 business days.";
     c.classList.add("show");
   }
-  document.getElementById("contactForm").addEventListener("submit", function(e){
+  var f = document.getElementById("contactForm");
+  SITE_FORM(f, "contact", "Message from the website", c);
+  f.addEventListener("submit", function(e){
     if (document.documentElement.classList.contains("live")) return;
     e.preventDefault();
     c.textContent = "Preview — nothing was sent. On the live site this goes straight to the museum's inbox.";

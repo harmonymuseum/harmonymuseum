@@ -4,6 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found — Harmony Museum</title>
+<base href="/">
+<script>
+/* Old WordPress addresses that a stub page can't cover (wildcards, the old PDF).
+   Generated from _redirects by tools/make_redirect_stubs.py. */
+/* redirects:start */
+var R = {
+ "/events/*": "/calendar.html",
+ "/news/*": "/news.html",
+ "/product/*": "/membership.html",
+ "/wp-admin/*": "/",
+ "/wp-content/uploads/2019/07/Walking-Tour-Map.pdf": "/assets/originals/Walking-Tour-Map.pdf"
+};
+/* redirects:end */
+(function(){
+  var p = location.pathname;
+  for (var k in R) {
+    var hit = k.slice(-1) === "*" ? p.indexOf(k.slice(0, -1)) === 0 : p === k;
+    if (hit) { location.replace(R[k]); return; }
+  }
+})();
+</script>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">

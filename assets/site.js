@@ -153,5 +153,28 @@
     document.querySelectorAll('a[href="shop.html"]').forEach(function (a) { a.hidden = true; });
   }
 
+  /* Contact + rental forms: post to S.forms[key] when set, otherwise hand the message
+     to the visitor's email app. Pages call SITE_FORM(form, "contact", subject, confirmEl). */
+  window.SITE_FORM = function (form, key, subject, confirm) {
+    var url = (S.forms || {})[key];
+    if (url) form.action = url;
+    form.addEventListener("submit", function (e) {
+      if (isProto || url) return;
+      e.preventDefault();
+      var lines = [];
+      form.querySelectorAll("input[name], select[name], textarea[name]").forEach(function (el) {
+        if (el.type === "hidden" || el.name === "bot-field" || !el.value) return;
+        var lab = el.closest("label"), t = lab && lab.querySelector(".lbl");
+        var val = el.tagName === "SELECT" ? el.options[el.selectedIndex].text : el.value;
+        lines.push((t ? t.textContent : el.name) + ": " + val);
+      });
+      location.href = "mailto:" + S.contact.email + "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(lines.join("\n\n"));
+      confirm.textContent = "Your email app should open with this filled in — press Send there. Nothing opened? Email " +
+        S.contact.email + " or call " + S.contact.phone + ".";
+      confirm.classList.add("show");
+    });
+  };
+
   window.SITE_TODAY = today; /* booking page reuses the same date override */
 })();

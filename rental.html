@@ -244,7 +244,7 @@ textarea{min-height:120px;resize:vertical}
         <div class="confirm" id="confirm"></div>
       </form>
       <div class="stubNote proto">
-        <b>Preview.</b> Nothing is sent while <code>prototype</code> is on. The form is wired for Netlify Forms and goes live the day the site moves to Netlify. Booked dates come from <code>venueHolds</code> in <code>data/site.js</code>.
+        <b>Preview.</b> Nothing is sent while <code>prototype</code> is on. On the live site it sends to the form service in <code>forms</code> (or opens an email) — see <code>data/site.js</code>. Booked dates come from <code>venueHolds</code> in <code>data/site.js</code>.
       </div>
     </div>
     <aside class="aside">
@@ -312,8 +312,8 @@ textarea{min-height:120px;resize:vertical}
   </div>
 </footer>
 
-<script src="data/site.js?v=10"></script>
-<script src="assets/site.js?v=4"></script>
+<script src="data/site.js?v=11"></script>
+<script src="assets/site.js?v=5"></script>
 <script>
 (function(){
   var S = window.SITE, V = S.venues || [];
@@ -379,8 +379,10 @@ textarea{min-height:120px;resize:vertical}
     c.classList.add("show");
     c.scrollIntoView({ block: "center" });
   }
-  document.getElementById("enq").addEventListener("submit", function(e){
-    if (document.documentElement.classList.contains("live")) return;   /* live: Netlify Forms takes it */
+  var f = document.getElementById("enq");
+  SITE_FORM(f, "rental", "Rental request from the website", c);
+  f.addEventListener("submit", function(e){
+    if (document.documentElement.classList.contains("live")) return;   /* live: SITE_FORM sends it */
     e.preventDefault();
     c.textContent = "Preview — nothing was sent. On the live site this goes straight to the museum's inbox.";
     c.classList.add("show");
