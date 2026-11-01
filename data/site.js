@@ -3,7 +3,7 @@
 window.SITE = {
   /* true while this is a preview: shows the "concept" footer and prototype notes.
      Set to false on launch day — nothing else needs to change. */
-  prototype: true,
+  prototype: false,
 
   /* How tours are reserved. "phone": every Book button becomes a call link.
      "online": buttons open the hosted booking service at onlineUrl (FareHarbor/Bookeo). */
