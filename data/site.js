@@ -17,6 +17,47 @@ window.SITE = {
      "cart": online ordering (needs Square and a volunteer who ships). */
   shop: { mode: "off" },
 
+  /* Top menus. Each link is defined once in `links`: the words shown, then where it goes
+     ("#name" jumps to a spot on the same page). `menus` lists, page by page, which links that
+     page's top bar shows, in order. To add a new page to the menus: add one line to `links`,
+     then add its name to each menu it belongs in. Changes show on the live site right away.
+     (The home page's "Plan a visit" button is separate and stays as it is.) */
+  links: {
+    visit:        ["Visit", "visit.html"],
+    properties:   ["Properties", "properties.html"],
+    walkingTour:  ["Walking tour", "walkingtour.html"],
+    rentals:      ["Rentals", "rental.html"],
+    history:      ["History", "history.html"],
+    calendar:     ["Calendar", "calendar.html"],
+    news:         ["News", "news.html"],
+    membership:   ["Membership", "membership.html"],
+    donate:       ["Donate", "donate.html"],
+    volunteer:    ["Volunteer", "get-involved.html"],
+    getInvolved:  ["Get involved", "get-involved.html"],
+    shop:         ["Shop", "shop.html"],
+    contact:      ["Contact", "contact.html"],
+    barn:         ["Barn", "#barn"],
+    stewartHall:  ["Stewart Hall", "#stewart"],
+    meetinghouse: ["Meetinghouse", "#church"],
+    ask:          ["Ask", "#request"]
+  },
+  menus: {
+    "about.html"        : ["visit", "properties", "history", "membership", "volunteer", "contact"],
+    "calendar.html"     : ["visit", "news", "walkingTour", "rentals", "membership", "contact"],
+    "contact.html"      : ["visit", "rentals", "history", "membership", "volunteer"],
+    "donate.html"       : ["visit", "properties", "history", "membership", "volunteer", "contact"],
+    "get-involved.html" : ["visit", "properties", "history", "membership", "donate", "contact"],
+    "harmony-line.html" : ["visit", "properties", "walkingTour", "membership", "contact"],
+    "history.html"      : ["visit", "properties", "walkingTour", "rentals", "membership", "contact"],
+    "index.html"        : ["properties", "walkingTour", "rentals", "shop", "history", "getInvolved"],
+    "membership.html"   : ["visit", "properties", "history", "donate", "volunteer", "contact"],
+    "news.html"         : ["visit", "calendar", "properties", "history", "membership", "contact"],
+    "properties.html"   : ["visit", "walkingTour", "rentals", "history", "membership", "contact"],
+    "rental.html"       : ["barn", "stewartHall", "meetinghouse", "ask", "visit", "contact"],
+    "shop.html"         : ["visit", "properties", "walkingTour", "membership", "contact"],
+    "visit.html"        : ["properties", "walkingTour", "calendar", "contact"]
+  },
+
   /* Newsletter is a members-only perk, sent the old-fashioned way (decided 2026-09-15).
      No public signup. Set formAction to a Kit form URL if that ever changes. */
   newsletter: { formAction: "", publicSignup: false },

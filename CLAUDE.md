@@ -19,6 +19,7 @@ about a minute.** There is no staging: what you push is what visitors see.
 | Walking-tour stop names/descriptions | `data/walking-tour.json`, then regenerate `data/walking-tour.js` (see below) | |
 | A page's words | the `.html` file | Pages are self-contained; shared bits are in `assets/`. |
 | Footer (all pages at once) | `tools/apply_footer.py` → then run it | Never edit the footer in individual pages. |
+| Top menus (which links each page shows) | `data/site.js` → `links`, `menus` | Each link defined once; each page lists the links it shows. Live at once. Then `python3 tools/apply_menus.py` refreshes the no-JavaScript copy inside each page (check.py warns until you do). Never edit a page's `<nav>` by hand. |
 | Colors | `assets/tokens.css` | The only place a color may be defined. |
 | Text a news post | `news.html` | Add an `<article class="post">`; dated events also go in `data/site.js`. |
 

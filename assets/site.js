@@ -120,6 +120,26 @@
     });
   }
 
+  /* Top menus come from S.links + S.menus in data/site.js. Each page's HTML keeps a copy of its
+     menu (tools/apply_menus.py) for anyone without JavaScript; this replaces it with the current
+     list. The home page's .ctaRow button stays where it is. */
+  var page = location.pathname.split("/").pop() || "index.html";
+  if (page.indexOf(".") < 0) page += ".html";
+  var menuKeys = S.menus && S.menus[page];
+  var menuNav = document.getElementById("barNav") || document.getElementById("mainNav");
+  if (menuKeys && menuNav && S.links) {
+    var cta = menuNav.querySelector(".ctaRow");
+    menuNav.textContent = "";
+    menuKeys.forEach(function (k) {
+      var l = S.links[k];
+      if (!l) return;
+      var a = document.createElement("a");
+      a.href = l[1]; a.textContent = l[0];
+      menuNav.appendChild(a);
+    });
+    if (cta) menuNav.appendChild(cta);
+  }
+
   /* Mobile menu toggle — any .menuBtn opens the nav named in its aria-controls */
   document.querySelectorAll(".menuBtn").forEach(function (mb) {
     var nav = document.getElementById(mb.getAttribute("aria-controls"));

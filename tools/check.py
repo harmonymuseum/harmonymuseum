@@ -51,6 +51,22 @@ if site:
             if not v.get(k): fail(f"venue `{v.get('key','?')}` is missing `{k}`")
     if site.get("hours", {}).get("closedDays") and not all(0 <= d <= 6 for d in site["hours"]["closedDays"]): fail("hours.closedDays must be 0–6")
     if not site.get("hours", {}).get("tourTimes"): fail("hours.tourTimes is empty")
+    links = site.get("links", {})
+    for name, l in links.items():                                         # menus: every link goes somewhere real
+        if not (isinstance(l, list) and len(l) == 2 and all(isinstance(x, str) and x for x in l)):
+            fail(f'links.{name} must be ["Words shown", "page.html"]'); continue
+        if not l[1].startswith("#") and not os.path.exists(l[1].split("#")[0]): fail(f"links.{name} points to {l[1]}, which doesn't exist")
+    for page, keys in site.get("menus", {}).items():
+        if not os.path.exists(page): fail(f"menus has an entry for {page}, which doesn't exist")
+        for k in keys:
+            if k not in links: fail(f"menus[{page}] uses `{k}`, which isn't in links")
+            elif links[k][1].startswith("#") and f'id="{links[k][1][1:]}"' not in read(page): fail(f"menus[{page}]: {links[k][1]} isn't on that page")
+    try:
+        sys.dont_write_bytecode = True; sys.path.insert(0, os.path.join(ROOT, "tools")); import apply_menus
+        stale = apply_menus.stamp(write=False)
+        if stale: warn("menu copy in " + ", ".join(stale) + " is older than data/site.js — run tools/apply_menus.py (the live site already shows the new menu)")
+    except Exception as e:
+        warn(f"couldn't compare page menus with data/site.js ({e})")
 
 # ── 2. walking-tour.js must be the generated copy of walking-tour.json ─────────────
 try:
