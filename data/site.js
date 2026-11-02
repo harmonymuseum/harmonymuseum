@@ -21,10 +21,9 @@ window.SITE = {
      No public signup. Set formAction to a Kit form URL if that ever changes. */
   newsletter: { formAction: "", publicSignup: false },
 
-  /* Contact and rental forms. Paste a form service's address (Formspree / Web3Forms) here
-     and the form posts to it. Empty: "Send" opens the visitor's email app, addressed to
-     contact.email with the message filled in. */
-  forms: { contact: "", rental: "" },
+  /* Contact and rental forms → Formspree (formspree.io; submissions are emailed and kept in
+     its dashboard). Empty: "Send" opens the visitor's email app, addressed to contact.email. */
+  forms: { contact: "https://formspree.io/f/mnppoagg", rental: "https://formspree.io/f/xjyypbap" },
 
   hours: {
     hoursShort: "1–4 p.m.",

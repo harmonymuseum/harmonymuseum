@@ -226,9 +226,8 @@ textarea{min-height:120px;resize:vertical}
       <span class="lbl">Check a date</span>
       <h2>Tell us what you're planning</h2>
       <p class="lede">No commitment — this just starts the conversation. The office will confirm the date is free and send the contract and insurance form.</p>
-      <form id="enq" name="rental-request" method="POST" action="rental.html?sent=1" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="rental-request">
-        <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+      <form id="enq" name="rental-request" method="POST" action="rental.html?sent=1">
+        <p hidden><label>Leave this empty: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
         <div class="grid2">
           <label><span class="lbl">Venue</span><select id="fVenue" name="venue"></select></label>
           <label><span class="lbl">Preferred date</span><input type="date" id="fDate" name="date" required></label>
@@ -312,8 +311,8 @@ textarea{min-height:120px;resize:vertical}
   </div>
 </footer>
 
-<script src="data/site.js?v=11"></script>
-<script src="assets/site.js?v=5"></script>
+<script src="data/site.js?v=12"></script>
+<script src="assets/site.js?v=6"></script>
 <script>
 (function(){
   var S = window.SITE, V = S.venues || [];

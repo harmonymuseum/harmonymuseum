@@ -153,17 +153,31 @@
     document.querySelectorAll('a[href="shop.html"]').forEach(function (a) { a.hidden = true; });
   }
 
-  /* Contact + rental forms: post to S.forms[key] when set, otherwise hand the message
-     to the visitor's email app. Pages call SITE_FORM(form, "contact", subject, confirmEl). */
+  /* Contact + rental forms: send to S.forms[key] (Formspree) in the background, then show the
+     page's own thank-you (the form's action, e.g. contact.html?sent=1). With no address set,
+     hand the message to the visitor's email app. Pages call SITE_FORM(form, key, subject, confirmEl). */
   window.SITE_FORM = function (form, key, subject, confirm) {
     var url = (S.forms || {})[key];
-    if (url) form.action = url;
     form.addEventListener("submit", function (e) {
-      if (isProto || url) return;
+      if (isProto) return;
       e.preventDefault();
+      if (url) {
+        var data = new FormData(form), btn = form.querySelector("button[type=submit]");
+        data.append("_subject", subject);
+        if (btn) btn.disabled = true;
+        fetch(url, { method: "POST", body: data, headers: { Accept: "application/json" } })
+          .then(function (r) { if (!r.ok) throw r; location.href = form.getAttribute("action"); })
+          .catch(function () {
+            if (btn) btn.disabled = false;
+            confirm.textContent = "That didn't go through. Please try again, email " + S.contact.email +
+              " or call " + S.contact.phone + ".";
+            confirm.classList.add("show");
+          });
+        return;
+      }
       var lines = [];
       form.querySelectorAll("input[name], select[name], textarea[name]").forEach(function (el) {
-        if (el.type === "hidden" || el.name === "bot-field" || !el.value) return;
+        if (el.type === "hidden" || el.name === "_gotcha" || !el.value) return;
         var lab = el.closest("label"), t = lab && lab.querySelector(".lbl");
         var val = el.tagName === "SELECT" ? el.options[el.selectedIndex].text : el.value;
         lines.push((t ? t.textContent : el.name) + ": " + val);
