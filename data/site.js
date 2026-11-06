@@ -172,10 +172,10 @@ window.SITE = {
      Optional: link (a page with details), where, note, tickets (an outside ticket page). */
   events: [
     { date: "2026-11-14", time: "10 a.m. – 6 p.m.", title: "Weihnachtsmarkt — German Christmas Market",
-      where: "Downtown Harmony", link: "news.html#weihnachtsmarkt", note: "Adults and children 12+ $10 · seniors 65+ and children under 12 $5",
+      where: "Downtown Harmony", link: "news.html#weihnachtsmarkt", note: "Adults $10 · children 12 to 17, seniors 65+ and veterans $5 · children under 12 free",
       tickets: "https://www.eventbrite.com/e/christmas-market-tickets-2001402543885" },
     { date: "2026-11-15", time: "12 – 4 p.m.", title: "Weihnachtsmarkt — German Christmas Market, day two",
-      where: "Downtown Harmony", link: "news.html#weihnachtsmarkt", note: "Adults and children 12+ $10 · seniors 65+ and children under 12 $5",
+      where: "Downtown Harmony", link: "news.html#weihnachtsmarkt", note: "Adults $10 · children 12 to 17, seniors 65+ and veterans $5 · children under 12 free",
       tickets: "https://www.eventbrite.com/e/christmas-market-tickets-2001402543885" },
     { date: "2026-12-31", title: "Silvester — New Year's Eve, German style",
       note: "Details to be announced" }
