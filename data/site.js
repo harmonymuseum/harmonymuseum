@@ -97,7 +97,7 @@ window.SITE = {
     /* Confirmed 2026-11-12: closed January through March 2027; tours by appointment. */
     {
       start: "2027-01-01", end: "2027-03-31",
-      message: "The museum is closed January – March. Tours by appointment — call (724) 452-7341. Walking tour and grounds remain open."
+      message: "The museum is closed January – March. Tours by appointment only — call (724) 452-7341. Walking tour and grounds remain open."
     }
   ],
 
