@@ -89,11 +89,15 @@ window.SITE = {
       start: "2026-11-26", end: "2026-11-27",
       message: "Closed November 26 – 27 for Thanksgiving. Reopening Saturday, November 28."
     },
-    /* Confirmed 2026-09-15: closed Dec 24–26. No winter closure is scheduled — the
-       museum may run tours in January. Add a record here if that changes. */
+    /* Confirmed 2026-09-15: closed Dec 24–26. */
     {
       start: "2026-12-24", end: "2026-12-26",
       message: "Closed December 24 – 26 for Christmas. Reopening Tuesday, December 29."
+    },
+    /* Confirmed 2026-11-12: closed January through March 2027; tours by appointment. */
+    {
+      start: "2027-01-01", end: "2027-03-31",
+      message: "The museum is closed January – March. Tours by appointment — call (724) 452-7341. Walking tour and grounds remain open."
     }
   ],
 
