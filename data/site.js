@@ -159,7 +159,7 @@ window.SITE = {
       title: "Thank you for making our Christmas Market a success!",
       text: "Want to support Harmony’s history all year? Become a member →",
       tickets: "https://www.zeffy.com/en-US/ticketing/historic-harmony-incs-memberships",
-      ticketsText: "Become a member →"
+      ticketsText: "Become a member"
     },
     {
       start: "2026-10-01", end: "2026-11-15",
