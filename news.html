@@ -45,6 +45,20 @@
 .mkt-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
 @media(max-width:760px){.mkt-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.mkt-grid{grid-template-columns:1fr}}
+.mkt-video{display:grid;grid-template-columns:minmax(0,62ch) 300px;justify-content:space-between;gap:40px;align-items:start}
+.mkt-video figure{margin:0}
+.mkt-video .vidnote{font-size:15.5px;font-style:italic;opacity:.75;margin-top:18px}
+.mkt-video .by{font-family:"Archivo Narrow",sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-top:8px}
+@media(max-width:760px){.mkt-video{grid-template-columns:1fr;gap:18px}.mkt-video figure{max-width:340px}}
+.reel{position:relative;background:var(--indigo-deep);aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.reel button{position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(to top,rgba(20,26,36,.75),rgba(20,26,36,.2));border:0;color:var(--paper);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:"Archivo Narrow",sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;font-weight:600}
+.reel button .play{width:68px;height:68px;border-radius:50%;border:2px solid var(--gold-lit);display:flex;align-items:center;justify-content:center;transition:background .18s}
+.reel button .play::after{content:"";border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent var(--gold-lit);margin-left:4px}
+.reel button:hover .play{background:rgba(216,184,124,.18)}
+.reel button .mark{font-family:"Bodoni Moda",serif;font-variation-settings:"opsz" 20;font-size:64px;color:var(--gold-lit);line-height:1;text-transform:none;letter-spacing:0;font-weight:400}
+.reel .instagram-media{margin:0!important;max-width:100%!important;min-width:0!important}
+.reel.loaded{aspect-ratio:auto;background:transparent}
+.reel.loaded button{display:none}
 </style>
 </head>
 <body>
@@ -71,10 +85,21 @@
     <span class="date">Saturday–Sunday, November 14–15, 2026</span>
     <h3>Danke schön, Harmony!</h3>
     <figure class="mkt-lead"><img src="assets/img/Weihnachtsmarkt-2026-Horses-2000w.jpg" alt="Horse-drawn wagon ride passing a historic brick house in Harmony" width="2000" height="1500"></figure>
-    <p>Thank you to everyone who joined us for this year's Weihnachtsmarkt. Between the Glühwein, the Alpen Schuhplattlers, and the Teutonia Männerchor, Harmony felt every bit like a German Christmas village. Every admission went directly to the Harmony Museum<!-- TODO: once the total is known, add it here, e.g. "...this year's market raised $X for the museum." -->, so your visit helps keep the town's history alive.</p>
-    <p>A special thank you to our vendors, performers, and volunteers. We couldn't do it without you.</p>
-    <p>Bis nächstes Jahr! We can't wait to see you next year.</p>
-    <p><a class="btn" href="https://www.zeffy.com/en-US/ticketing/historic-harmony-incs-memberships" target="_blank" rel="noopener">Become a member</a></p>
+    <div class="mkt-video">
+      <div>
+        <p>Thank you to everyone who joined us for this year's Weihnachtsmarkt. Between the Glühwein, the Alpen Schuhplattlers, and the Teutonia Männerchor, Harmony felt every bit like a German Christmas village. Every admission went directly to the Harmony Museum<!-- TODO: once the total is known, add it here, e.g. "...this year's market raised $X for the museum." -->, so your visit helps keep the town's history alive.</p>
+        <p>A special thank you to our vendors, performers, and volunteers. We couldn't do it without you.</p>
+        <p>Bis nächstes Jahr! We can't wait to see you next year.</p>
+        <p><a class="btn" href="https://www.zeffy.com/en-US/ticketing/historic-harmony-incs-memberships" target="_blank" rel="noopener">Become a member</a></p>
+        <p class="vidnote">Pittsburgh's 412 On The Move came back to film the market. Watch their video from the weekend.</p>
+      </div>
+      <figure>
+        <div class="reel" id="mktReel" data-url="https://www.instagram.com/reel/DfukuEiSkuu/">
+          <button type="button" aria-label="Watch 412 On The Move's Christmas Market reel on Instagram"><span class="mark">1809</span><span class="play"></span>Watch the reel</button>
+        </div>
+        <figcaption class="by">Filmed by @412onthemove</figcaption>
+      </figure>
+    </div>
     <div class="mkt-grid">
       <img src="assets/img/Weihnachtsmarkt-2026-Crowd-Outside2-1200w.jpg" alt="Crowds walking among white tents at the Harmony Weihnachtsmarkt" width="1200" height="900" loading="lazy">
       <img src="assets/img/Weihnachtsmarkt-2026-Wine-1200w.jpg" alt="Glühwein served in Harmony Museum mugs" width="1200" height="900" loading="lazy">
@@ -173,6 +198,22 @@
       (e.tickets ? '<a class="go" href="' + e.tickets + '" target="_blank" rel="noopener">Tickets on Eventbrite &rarr;</a>' : "") +
       (e.link ? '<a class="go" href="' + e.link + '">Details &rarr;</a>' : "") + '</div></div>';
   }).join("") : '<div class="ev"><div class="t">Nothing scheduled yet — check the <a href="calendar.html">calendar</a> for tour days.</div></div>';
+})();
+/* Christmas Market reel — Instagram's embed loads only when the visitor clicks (same as the homepage) */
+(function(){
+  var reel = document.getElementById("mktReel");
+  if (!reel) return;
+  reel.querySelector("button").addEventListener("click", function(){
+    var url = reel.getAttribute("data-url");
+    reel.insertAdjacentHTML("beforeend",
+      '<blockquote class="instagram-media" data-instgrm-permalink="' + url +
+      '" data-instgrm-version="14" style="width:100%"><a href="' + url + '">View this post on Instagram</a></blockquote>');
+    reel.classList.add("loaded");
+    if (window.instgrm) { window.instgrm.Embeds.process(); return; }
+    var sc = document.createElement("script");
+    sc.async = true; sc.src = "https://www.instagram.com/embed.js";
+    document.body.appendChild(sc);
+  });
 })();
 </script>
 </body>
