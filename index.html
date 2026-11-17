@@ -95,7 +95,7 @@ section.spot{padding:0}
 .spot h2{font-size:26px;font-variation-settings:"opsz" 20;line-height:1.15}
 .spot p{margin:6px 0 0;opacity:.85;max-width:60ch}
 .spot .acts{margin-left:auto;flex:none;display:flex;gap:10px;flex-wrap:wrap}
-.spot .btn[hidden]{display:none}
+.spot .btn[hidden],.spot .lbl[hidden]{display:none}
 @media(max-width:760px){.spot .wrap{flex-direction:column;align-items:flex-start;gap:14px}.spot .acts{margin-left:0}.spot h2{font-size:22px;font-variation-settings:"opsz" 12}}
 .credit{position:absolute;right:16px;bottom:10px;z-index:3;font-family:"Archivo Narrow",sans-serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(233,227,212,.45)}
 
@@ -435,7 +435,7 @@ section.spot{padding:0}
   Most were uploaded in 2019 and are 1024px wide; they hold up at these crop sizes but not full-bleed on a large display.
 </div>
 
-<script src="data/site.js?v=15"></script>
+<script src="data/site.js?v=16"></script>
 <script src="assets/site.js?v=7"></script>
 <script>
 /* Event spotlight — shows the current record from SITE.spotlight, if any */
@@ -445,12 +445,16 @@ section.spot{padding:0}
     return new Date(x.start + "T00:00:00") <= t && t <= new Date(x.end + "T23:59:59");
   })[0];
   if (!on) return;
-  document.getElementById("spotLbl").textContent = on.label;
+  var lb = document.getElementById("spotLbl");
+  if (on.label) lb.textContent = on.label; else lb.hidden = true;
   document.getElementById("spotTitle").textContent = on.title;
   document.getElementById("spotText").textContent = on.text;
   var a = document.getElementById("spotLink");
-  a.textContent = on.linkText; a.href = on.link;
-  if (on.tickets) { var tk = document.getElementById("spotTickets"); tk.href = on.tickets; tk.hidden = false; }
+  if (on.link) { a.textContent = on.linkText; a.href = on.link; } else a.hidden = true;
+  if (on.tickets) {
+    var tk = document.getElementById("spotTickets"); tk.href = on.tickets; tk.hidden = false;
+    if (on.ticketsText) tk.textContent = on.ticketsText;
+  }
   document.getElementById("spotlight").hidden = false;
 })();
 </script>

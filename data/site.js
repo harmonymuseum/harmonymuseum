@@ -150,8 +150,17 @@ window.SITE = {
   /* Homepage spotlight — a band under the big photo that promotes one big event.
      It shows ONLY between start and end (inclusive), then disappears by itself.
      Leave the array empty for no band. Test with ?today=YYYY-MM-DD.
-     Optional: tickets (an outside ticket page) — becomes the red button; link turns into the plain one. */
+     Optional: tickets (an outside ticket page) — becomes the red button; link turns into the plain one.
+     Optional: ticketsText (the red button's words; default "Get tickets on Eventbrite").
+     label and link may be left out. */
   spotlight: [
+    {
+      start: "2026-11-16", end: "2026-12-31",
+      title: "Thank you for making our Christmas Market a success!",
+      text: "Want to support Harmony’s history all year?",
+      tickets: "https://www.zeffy.com/en-US/ticketing/historic-harmony-incs-memberships",
+      ticketsText: "Become a member →"
+    },
     {
       start: "2026-10-01", end: "2026-11-15",
       label: "Saturday & Sunday, November 14 – 15",
