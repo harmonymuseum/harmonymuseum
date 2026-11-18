@@ -94,6 +94,11 @@ window.SITE = {
       start: "2026-12-24", end: "2026-12-26",
       message: "Closed December 24 – 26 for Christmas. Reopening Tuesday, December 29."
     },
+    /* Confirmed 2026-11-18: no tours Dec 31 (Silvester celebration). */
+    {
+      start: "2026-12-31", end: "2026-12-31",
+      message: "No tours on Thursday, December 31 — the museum is closed for the Silvester celebration. Walking tour and grounds remain open."
+    },
     /* Confirmed 2026-11-12: closed January through March 2027; tours by appointment. */
     {
       start: "2027-01-01", end: "2027-03-31",
