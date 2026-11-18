@@ -126,8 +126,8 @@ html.live .proto{display:none!important}
   </div>
 </footer>
 
-<script src="data/site.js?v=20"></script>
-<script src="assets/site.js?v=7"></script>
+<script src="data/site.js?v=21"></script>
+<script src="assets/site.js?v=8"></script>
 <script>
 (function(){
   var S = window.SITE, today = window.SITE_TODAY || new Date();
@@ -138,9 +138,9 @@ html.live .proto{display:none!important}
     return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
   }
   function inClosure(d){
-    return (S.closures || []).some(function(c){
+    return (S.closures || []).filter(function(c){
       return new Date(c.start+"T00:00:00") <= d && d <= new Date(c.end+"T23:59:59");
-    });
+    })[0];
   }
 
   function render(){
@@ -155,7 +155,7 @@ html.live .proto{display:none!important}
       var key = iso(d), closed = inClosure(d), open = !closed && S.hours.closedDays.indexOf(d.getDay()) < 0;
       var cls = "day" + (closed ? " closed" : "") + (key === iso(today) ? " today" : "");
       var cell = '<div class="' + cls + '"><span class="n" data-dow="' + DOW[d.getDay()] + '">' + day + "</span>";
-      if (closed) cell += '<span class="tag closedTag">Closed</span>';
+      if (closed) cell += '<span class="tag closedTag">' + (closed.label || "Closed") + '</span>';
       else if (open) cell += '<a class="tag tour" href="visit.html#hours">Tours 1:00 &amp; 2:30</a>';
       (S.events || []).forEach(function(e){
         if (e.date !== key) return;

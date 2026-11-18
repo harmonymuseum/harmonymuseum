@@ -54,7 +54,7 @@
   if (line) {
     var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     if (active.length) {
-      line.textContent = "Closed today — see notice above";
+      line.textContent = (active[0].label || "Closed") + " today — see notice above";
     } else if (!openDay(today)) {
       var n = new Date(today);
       do { n.setDate(n.getDate() + 1); } while (!openDay(n));
