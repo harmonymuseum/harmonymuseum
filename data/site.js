@@ -99,7 +99,7 @@ window.SITE = {
        Optional `label` replaces the word "Closed" on the calendar and today line. */
     {
       start: "2026-12-31", end: "2026-12-31", label: "No tours",
-      message: "No guided tours on Thursday, December 31, because of the Silvester celebration. Walking tour and grounds remain open."
+      message: "No guided tours on Thursday, December 31, due to the Silvester celebration. Walking tour and grounds remain open."
     },
     /* Confirmed 2026-11-12: closed January through March 2027; tours by appointment. */
     {
